@@ -49,8 +49,10 @@ public class leer {
 	            	            
 	            double latitude = Double.parseDouble(latlong[0]);
 	            double longitude = Double.parseDouble(latlong[1]);
+	            double ele = Double.parseDouble(latlong[2]);
+	            String time = latlong[3];
 	            
-	            Punto q = new Punto(latitude,longitude);
+	            Punto q = new Punto(latitude,longitude,ele,time);
 	            punto.add(q);
 	            
 	            
@@ -154,19 +156,35 @@ public class leer {
 	           Element elementRoot = document.getDocumentElement();
 
 	            NodeList nodelist_trkpt = document.getElementsByTagName("trkpt");
+	           
+	           //NodeList nodelist_ele = document.getElementsByTagName("ele");
 
 	            for(int i = 0; i < nodelist_trkpt.getLength(); i++){
-
+	            	 
 	                Node node = nodelist_trkpt.item(i);
 	                NamedNodeMap attributes = node.getAttributes();
+	                System.out.println("tkrpt: "+i);
+	                NodeList children_trkpt=node.getChildNodes();
+	                
+	                	String ele=children_trkpt.item(1).getTextContent();
+	                	String time=children_trkpt.item(3).getTextContent();
+	                	System.out.println("hijo: "+i);
+	                	System.out.println("ele: "+ele);
+	                	System.out.println("time: "+time);
+	                
+	               //String valorele=ele.getNodeValue();
+	                //System.out.println("ele: "+children_trkpt);
 
 	                String newLatitude = attributes.getNamedItem("lat").getTextContent();
 	                Double newLatitude_double = Double.parseDouble(newLatitude);
 
 	                String newLongitude = attributes.getNamedItem("lon").getTextContent();
 	                Double newLongitude_double = Double.parseDouble(newLongitude);
+	                
+	                
 
-	                String newLocationName = newLatitude + ":" + newLongitude;
+	                String newLocationName = newLatitude + ":" + newLongitude + ":" + ele + ":" + time;
+	                
 
 	                list.add(newLocationName);
 

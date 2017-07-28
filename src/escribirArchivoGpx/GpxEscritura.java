@@ -29,7 +29,7 @@ public class GpxEscritura {
 	
 		public static void CrearArchivo(List<Punto> puntos) throws IOException, ParserConfigurationException{
 			
-			String lat=null,lon=null,ruta="C:/Users/ESTEBAN/Desktop/ArchivosGpx/archivo.gpx";
+			String lat=null,lon=null,elev=null,time=null,ruta="C:/Users/ESTEBAN/Desktop/ArchivosGpx/archivo.gpx";
 			
 			Document document = null;
 			
@@ -43,13 +43,17 @@ public class GpxEscritura {
 						//System.out.println("la: "+puntos.get(i).getLatitud());		
 				lat=String.valueOf(puntos.get(i).getLatitud());
 				lon=String.valueOf(puntos.get(i).getLongitud());
+				elev=String.valueOf(puntos.get(i).getElevacion());
+				time=String.valueOf(puntos.get(i).getTiempo());
 				           
 		        try{
 		        	//Creación de elementos
 		          
 		           Element tkrpt = document.createElement("trkpt"); 
-		           //Element ele= document.createElement("ele");
-		           //Text valorele = document.createTextNode("55.74");
+		           Element ele= document.createElement("ele");
+		           Element tim= document.createElement("time");
+		           Text valorele = document.createTextNode(elev);
+		           Text valortime = document.createTextNode(time);
 		          
 		           
 
@@ -61,9 +65,11 @@ public class GpxEscritura {
 		           tkrpt.setAttribute("lat",lat);
 		           tkrpt.setAttribute("lon",lon);
 		         
-		           //tkrpt.appendChild(ele);
+		           tkrpt.appendChild(ele);
+		           tkrpt.appendChild(tim);
 		           
-		           //ele.appendChild(valorele);
+		           ele.appendChild(valorele);
+		           tim.appendChild(valortime);
 		           
 		        }catch(Exception e){
 		            System.err.println("Error");

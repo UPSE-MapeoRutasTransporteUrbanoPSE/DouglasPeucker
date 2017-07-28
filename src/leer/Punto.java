@@ -13,18 +13,22 @@ public class Punto {
       private double latitud;
       private double longitud;
       private double epsilon;
+      private double elevacion;
+      private String tiempo;
       
       public Punto(){}
       // Constructor
-      public Punto(double x, double y) {
+      public Punto(double x, double y,double ele,String time) {
         this.latitud = x;
         this.longitud = y;
+        this.elevacion=ele;
+        this.tiempo=time;
       }
 
       // toString: devuelve una cadena con la representacion del objeto
       public String toString() {
         // el signo + para cadenas no significa "suma matematica" sino concatenacion
-        return "(" + latitud + ", " + longitud+ ")";
+        return "(" + latitud + ", " + longitud+ ", " +elevacion +", "+ tiempo +")";
       }
 
      
@@ -37,7 +41,17 @@ public class Punto {
       public double getLongitud() {
         return longitud;
       }
-      public Punto calcularMaxima(ArrayList<Punto> otrosPuntos) {
+      
+      
+      public double getElevacion() {
+		return elevacion;
+	}
+      
+      
+	public String getTiempo() {
+		return tiempo;
+	}
+	public Punto calcularMaxima(ArrayList<Punto> otrosPuntos) {
             Punto puntoMaximo = null;
 
             if (otrosPuntos != null && otrosPuntos.size() > 0) {
